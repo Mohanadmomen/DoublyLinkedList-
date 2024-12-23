@@ -5,6 +5,6 @@
 
 int main() {
     LoginScreen();
-    
+
     return 0;
 }

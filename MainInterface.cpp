@@ -4,17 +4,19 @@
 
 using namespace std;
 
-DoublyLinkedList library[3];
+DoublyLinkedList library[4];
 
 // Function to print a boxed message
 void printBoxedMessage(const string& message) {
-
     int length = message.length();
-    string border(length + 4, '#'); // Create a border with '#' symbols
+    string border(length + 6, '='); // Top and bottom border
+    string sideBorder = "|";        // Side borders
 
-    cout << border << endl;
-    cout << "# " << message << " #" << endl;
-    cout << border << endl;
+    cout << border << endl;                        // Top border
+    cout << sideBorder << " " << string(length + 3, ' ') << sideBorder << endl; // Top padding
+    cout << sideBorder << " " << message << "   " << sideBorder << endl;         // Message line
+    cout << sideBorder << " " << string(length + 3, ' ') << sideBorder << endl; // Bottom padding
+    cout << border << endl;                        // Bottom border
 }
 
 void MainInterface(int user){
@@ -148,7 +150,8 @@ void LoginScreen() {
         // Check if the username exists and the password matches
         if (credentials.count(UserName) > 0 && credentials[UserName].first == Password) {
             Loginfailed = false;
-            cout << "Login successful! Welcome, " << UserName << "!\n";
+            //cout << "Login successful! Welcome, " << UserName << "!\n";
+            system("cls");
             MainInterface(credentials[UserName].second);
         } else if (--trials == 0) {
             cout << "You have exceeded your trials\n";
