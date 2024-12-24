@@ -154,8 +154,7 @@ map<string, pair<string, int>> credentials = {};
 
 // Function to insert a new credential and save it to a file
 void insertCredential(const string& username, const string& password) {
-    // Start user IDs at 4
-    static int nextId = 4;
+    
     
     // Check if the username already exists
     if (credentials.find(username) != credentials.end()) {
@@ -193,6 +192,7 @@ void loadCredentialsFromFile() {
     else {
         cout << "Error: Could not open file for reading credentials.\n";
     }
+    nextId = id+1;
 }
 
 

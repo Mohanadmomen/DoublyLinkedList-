@@ -14,6 +14,7 @@ void printBoxedMessage(const string& message);
 
 
 
+static int nextId ;
 extern map<string, pair<string, int>> credentials;
 
 
