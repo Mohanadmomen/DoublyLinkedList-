@@ -12,8 +12,10 @@ using namespace std;
 void LoginScreen();
 void printBoxedMessage(const string& message);
 
+
+
 extern map<string, pair<string, int>> credentials;
-void insertCredential(const string& username, const string& password);
+
 
 // Node structure
 struct Node {
@@ -41,6 +43,11 @@ public:
 
     void saveToFile(const string& filename);
     void loadFromFile(const string& filename);
+
+   
 };
+
+void insertCredential(const string& username, const string& password);
+void loadCredentialsFromFile();
 #endif
 

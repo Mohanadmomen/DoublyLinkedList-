@@ -1,7 +1,8 @@
 #include "DoublyLinkedList.h"
-
+#include <iomanip>
 // Constructor
 DoublyLinkedList::DoublyLinkedList() : head(nullptr), tail(nullptr) {}
+
 
 // Destructor
 
@@ -83,10 +84,25 @@ void DoublyLinkedList::destroy() {
     
 }
 
+
+
 void DoublyLinkedList::display() {
+    int number = 1;
+    if (head == nullptr) {
+        cout << "The list is empty!" << endl;
+        return;
+    }
+
+    cout << left << setw(10) << "No"
+        << setw(30) << "Name of the Book" << endl;
+
+    cout << string(70, '-') << endl;
+
     Node* current = head;
     while (current != nullptr) {
-        cout << current->data << endl;
+        cout << left << setw(10) << number++
+             << setw(30) << current->data
+             << endl;
         current = current->next;
     }
     cout << endl;
@@ -133,28 +149,50 @@ void DoublyLinkedList::loadFromFile(const string& filename) {
 
 
 // Store multiple user credentials
-map<string, pair<string, int>> credentials = {
-        {"admin", {"admin", 0}},
-        {"user1", {"pass1", 1}},
-        {"user2", {"pass2", 2}},
-        {"guest", {"guest", 3}}
-};
+map<string, pair<string, int>> credentials = {};
 
 
+// Function to insert a new credential and save it to a file
 void insertCredential(const string& username, const string& password) {
-    // Start user IDs at 5
-    static int nextId = 5;
-
+    // Start user IDs at 4
+    static int nextId = 4;
+    
     // Check if the username already exists
     if (credentials.find(username) != credentials.end()) {
         cout << "Error: Username '" << username << "' already exists in the system.\n";
         return;
     }
 
-    // Insert the new user
+   
     credentials[username] = { password, nextId++ };
 
-  
+    // Open file to save the credentials
+    ofstream outFile("credentials.txt", ios::app); // Open in append mode
+    if (outFile.is_open()) {
+        outFile << username << " " << password << " " << nextId - 1 << endl;
+        cout << "User '" << username << "' added successfully with ID: " << nextId - 1 << endl;
+    }
+    else {
+        cout << "Error: Could not open file for writing credentials.\n";
+    }
+    outFile.close(); // Close the file
+}
+
+// Function to load credentials from the file
+void loadCredentialsFromFile() {
+    ifstream inFile("credentials.txt");
+    string username, password;
+    int id;
+
+    if (inFile.is_open()) {
+        while (inFile >> username >> password >> id) {
+            credentials[username] = { password, id };
+        }
+        inFile.close(); // Close the file after reading
+    }
+    else {
+        cout << "Error: Could not open file for reading credentials.\n";
+    }
 }
 
 

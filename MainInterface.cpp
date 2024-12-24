@@ -4,7 +4,7 @@
 
 using namespace std;
 
-DoublyLinkedList library[4];
+DoublyLinkedList library[10];
 
 // Function to print a boxed message
 void printBoxedMessage(const string& message) {
