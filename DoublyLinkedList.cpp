@@ -3,6 +3,11 @@
 // Constructor
 DoublyLinkedList::DoublyLinkedList() : head(nullptr), tail(nullptr) {}
 
+// Destructor
+
+DoublyLinkedList::~DoublyLinkedList() { destroy();}
+
+
 void DoublyLinkedList::insert(string data) {
     Node* newNode = new Node(data);
     if (head == nullptr) {
@@ -75,14 +80,52 @@ void DoublyLinkedList::destroy() {
         delete temp;
     }
     head = tail = nullptr;
-    cout << "List destroyed!" << endl;
+    
 }
 
 void DoublyLinkedList::display() {
     Node* current = head;
     while (current != nullptr) {
-        cout << current->data << " ";
+        cout << current->data << endl;
         current = current->next;
     }
     cout << endl;
 }
+
+
+
+
+void DoublyLinkedList::saveToFile(const string& filename) {
+    ofstream file(filename);
+    if (!file) {
+        printBoxedMessage("Error: Unable to open file for saving." );
+        return;
+    }else printBoxedMessage("Library saved to file successfully!");
+
+    Node* current = head;
+    while (current) {
+        file << current->data << endl; // Write each node's data to a new line
+        current = current->next;
+    }
+
+    file.close();
+}
+
+void DoublyLinkedList::loadFromFile(const string& filename) {
+    ifstream file(filename);
+    if (!file) {
+        printBoxedMessage("Error: Unable to open file for loading.");
+        return;
+    }else printBoxedMessage("Library loaded from file successfully!");
+
+    destroy(); // Clear the current list
+
+    string line;
+    while (getline(file, line)) {
+        insert(line); // Insert each line as a new node
+    }
+
+    file.close();
+}
+
+
