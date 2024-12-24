@@ -32,10 +32,11 @@ void MainInterface(int user) {
         cout << "4. Remove Book\n";
         cout << "5. Sort Library\n";
         cout << "6. Destroy Library\n";
-        cout << "7. Login\n";
+        cout << "7. User\n";
         cout << "8. Exit Program\n";
         cout << "9. Save Library to File\n";
         cout << "10. Load Library from File\n";
+        cout << "11. Insert User\n";
         cout << "Enter your choice: ";
         cin >> choice;
 
@@ -131,10 +132,25 @@ void MainInterface(int user) {
             
             break;
 
-        default:
+        case 11: {
+            system("cls");
+            string newuser1, newpass1;
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Enter username: ";
+            getline(cin, newuser1);
+            cout << "Enter password: ";
+            getline(cin, newpass1);
+
+            insertCredential(newuser1, newpass1);
+
+            break;
+        }
+
+        default: {
             system("cls");
             cout << "Invalid choice. Please try again.\n";
             break;
+        }
         }
 
     } while (choice != 7);
@@ -145,13 +161,7 @@ void LoginScreen() {
     int trials = 3;
     string UserName, Password;
     bool Loginfailed = true;
-    // Store multiple user credentials
-    map<string, pair<string, int>> credentials = {
-            {"admin", {"admin", 0}},
-            {"user1", {"pass1", 1}},
-            {"user2", {"pass2", 2}},
-            {"guest", {"guest", 3}}
-    };
+   
 
 
     do {

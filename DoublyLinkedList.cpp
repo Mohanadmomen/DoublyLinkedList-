@@ -129,3 +129,32 @@ void DoublyLinkedList::loadFromFile(const string& filename) {
 }
 
 
+
+
+
+// Store multiple user credentials
+map<string, pair<string, int>> credentials = {
+        {"admin", {"admin", 0}},
+        {"user1", {"pass1", 1}},
+        {"user2", {"pass2", 2}},
+        {"guest", {"guest", 3}}
+};
+
+
+void insertCredential(const string& username, const string& password) {
+    // Start user IDs at 5
+    static int nextId = 5;
+
+    // Check if the username already exists
+    if (credentials.find(username) != credentials.end()) {
+        cout << "Error: Username '" << username << "' already exists in the system.\n";
+        return;
+    }
+
+    // Insert the new user
+    credentials[username] = { password, nextId++ };
+
+  
+}
+
+
