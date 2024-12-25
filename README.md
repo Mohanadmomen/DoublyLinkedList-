@@ -1,4 +1,4 @@
-# Library Management System
+# Library Management System 🚀
 
 A *Library Management System* that uses a *Doubly Linked List* to manage books and users, providing operations like adding, searching, removing books, and managing user accounts. Data is stored in flat files for user credentials and book records.
 
